@@ -39,7 +39,7 @@ ion-icon{
    border-radius: 3px;
    box-shadow: 2px 2px 15px rgba(77, 77, 77, .5);
    
-   min-width:37.5rem;
+   min-width:38rem;
    margin: auto;
    
 }
@@ -93,7 +93,7 @@ input[type="submit"]:hover {
 
 .todo-item {
     display:grid;
-    grid-template-columns: 1fr minmax(20rem,auto) 1fr 1fr;
+    grid-template-columns: 1fr minmax(25rem,auto) 1fr 1fr;
     grid-template-rows: auto;
     column-gap: .8rem;
     

@@ -20,15 +20,60 @@
         p.className = 'task-name'
         p.textContent = tarefa
 
+        //criando os botões de checagem, editar e deletar
+
+        const checkButton = document.createElement('Button')
+        const editButton = document.createElement('i')
+        const deleteButton = document.createElement('i')
+
+        //colocando as classes nos botões
+
+        checkButton.className = 'button-check'
+        checkButton.innerHTML = '<i class="fas fa-check displayNone"></i>'
+        editButton.className = 'fas fa-edit'
+        deleteButton.className = 'fas fa-trash-alt'
+
+        //adicionando os botões dentro da li
+
+        li.appendChild(checkButton)
+        li.appendChild(editButton)
+        li.appendChild(deleteButton)
+
         //adicionar o paragrafo dentro da li
         li.appendChild(p)
         //adicionar o li dentro da ul
         ul.appendChild(li)
 
+        //criar div para editar as tarefas
+
+        const containerEdit = document.createElement('div')
+        containerEdit.className = 'editContainer'
+
+        const inputEdit = document.createElement('input')
+        inputEdit.className = 'editInput'
+        inputEdit.setAttribute('type', 'text')
+        containerEdit.appendChild(inputEdit)
+
+        const containerEditButton = document.createElement('button')
+        containerEditButton.className = 'editButton'
+        containerEditButton.textContent = 'Editar'
+        containerEdit.appendChild(containerEditButton)
+
+        const containerCancelButton = document.createElement('button')
+        containerCancelButton.className = 'cancelButton'
+        containerCancelButton.textContent = 'Cancelar'
+        containerEdit.appendChild(containerCancelButton)
+
+        //colocar nova janela do editar dentro da li
+
+        li.appendChild(containerEdit)
+
+
+
         //adicionar um event listerner para cada li criada
 
         li.addEventListener('click', function(){
-            console.log(li)
+            
         })
 
     }
@@ -57,5 +102,19 @@
                 console.log(elemento)
             })
         });
+
+        //adicionar evento de click na ul inteira
+
+        ul.addEventListener('click', function(e){
+            console.log(e.target)
+            if(e.target.className === 'fas fa-edit'){
+                console.log('botão de editar')
+            }else if(e.target.className === 'fas fa-trash-alt'){
+                console.log('botão de deletar')
+            }else if(e.target.className === 'button-check'){
+                console.log('botão de checar')
+            }
+        })
+        
     
 })()
