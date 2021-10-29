@@ -8,17 +8,23 @@
     //criar uma variavel li
     const li = document.getElementsByClassName('todo-item')
 
+    const lis=ul.getElementsByTagName('li')
+
     //função para adicionar li dentro da ul
 
     function adicionarTarefa(tarefa){
 
-        //criando li e p e coloca as classes
+        
         
         const li = document.createElement('li')
         li.className = 'todo-item'
+
+        //criando li e p e colocando as classes
         const p = document.createElement('p')
         p.className = 'task-name'
         p.textContent = tarefa
+        
+        
 
         //criando os botões de checagem, editar e deletar
 
@@ -26,12 +32,15 @@
         const editButton = document.createElement('i')
         const deleteButton = document.createElement('i')
 
+        
         //colocando as classes nos botões
 
         checkButton.className = 'button-check'
         checkButton.innerHTML = '<i class="fas fa-check displayNone"></i>'
         editButton.className = 'fas fa-edit'
         deleteButton.className = 'fas fa-trash-alt'
+
+        
 
         //adicionando os botões dentro da li
 
@@ -43,6 +52,8 @@
         li.appendChild(p)
         //adicionar o li dentro da ul
         ul.appendChild(li)
+
+        
 
         //criar div para editar as tarefas
 
@@ -82,26 +93,13 @@
         e.preventDefault()
         console.log(tarefa.value)
 
-        //adicionando li dentro da ul sem função
-        /* ul.innerHTML += `<li class="todo-item">
-                <button class="button-check">
-                    <i class="fas fa-check displayNone"></i>
-                </button>
-                <p class="task-name">${tarefa.value}</p>
-                <i class="fas fa-edit"></i>
-                <i class="fas fa-trash-alt"></i>
-            </li>` */
          adicionarTarefa(tarefa.value)
          tarefa.value = ''
          tarefa.focus()
          
     });
 
-        [...li].forEach(function (elemento){
-            elemento.addEventListener('click', function(e){
-                console.log(elemento)
-            })
-        });
+        
 
         //adicionar evento de click na ul inteira
 
@@ -111,9 +109,65 @@
                 console.log('botão de editar')
             }else if(e.target.className === 'fas fa-trash-alt'){
                 console.log('botão de deletar')
+                
             }else if(e.target.className === 'button-check'){
                 console.log('botão de checar')
             }
+
+            //selecionar tarefas de editar, deletar e checar
+            let currentLi = e.target
+            while(currentLi.nodeName !== 'LI'){
+                currentLi = currentLi.parentElement
+            }
+            console.log(currentLi)
+
+            const indexAtualLi = [...lis].indexOf(currentLi)
+            console.log(indexAtualLi)
+
+            //remover tarefa
+            if(e.target.className === 'fas fa-trash-alt'){
+            
+            currentLi.parentElement.removeChild(currentLi)
+            }
+            //abrir tela editar
+            if(e.target.className === 'fas fa-edit'){
+            const editContainer = currentLi.querySelector('.editContainer')
+            editContainer.style.display = 'flex'
+            //aula 145 - 4 minutos
+            }
+
+            //campo editar
+            
+
+            if(e.target.className === 'editButton'){
+
+            let textoDigitado = currentLi.querySelector('.editInput').value
+            
+            const editContainer = currentLi.querySelector('.editContainer')
+            
+            //recuperar valor digitado e colocar novo valor no lugar
+            
+            let valor = document.getElementsByClassName('task-name')[indexAtualLi]
+
+            valor.innerText = textoDigitado
+            //fechar campo editar
+            editContainer.style.display = "none"
+  
+            }
+
+            //cancelar edição
+
+            if(e.target.className === 'cancelButton'){
+            
+                const editContainer = currentLi.querySelector('.editContainer')
+                editContainer.style.display = "none"
+                let valor = document.getElementsByClassName('task-name')[indexAtualLi]
+                //quando apertar no 
+                currentLi.querySelector('.editInput').value = valor.innerHTML
+                
+
+            }
+            
         })
         
     
