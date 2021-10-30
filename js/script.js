@@ -5,12 +5,12 @@
 
     //armazenar ul para colocar a li dentro
     const ul = document.getElementById('todo-list')
-    //criar uma variavel li
-    const li = document.getElementsByClassName('todo-item')
-
+    
     const lis=ul.getElementsByTagName('li')
 
     //função para adicionar li dentro da ul
+
+  
 
     function adicionarTarefa(tarefa){
 
@@ -165,6 +165,14 @@
                 //quando apertar no 
                 currentLi.querySelector('.editInput').value = valor.innerHTML
                 
+            }
+
+            //adicionar marcador de atividade completa
+
+            if(e.target.className ==='button-check'){
+                currentLi.querySelector('.fa-check').classList.remove('displayNone')
+            }else{
+                currentLi.querySelector('.fa-check').classList.add('displayNone')
 
             }
             
